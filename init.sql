@@ -6,5 +6,6 @@ CREATE TABLE IF NOT EXISTS users (
   password VARCHAR(255) NOT NULL,
   urlPhoto VARCHAR(255) NOT NULL,
   urlCV VARCHAR(255) NOT NULL,
-  gender VARCHAR(5) NOT NULL,
+  gender VARCHAR(5) NOT NULL
+  
 );

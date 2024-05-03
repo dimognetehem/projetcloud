@@ -32,7 +32,7 @@ form.addEventListener("submit", () => {
             if (data.redirect) {
                 setTimeout(() => {
                     window.location.href = data.redirect;
-                }, 1500);
+                }, 1000);
             }
         })
         

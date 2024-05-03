@@ -1,4 +1,12 @@
 const express = require("express");
+const multer = require('multer');
+const storage = multer.diskStorage({
+    destination: './files',
+    filename: function (req, file, cb) {
+      cb(null, Date.now() + '.' + file.mimetype.split('/')[1]); 
+    }
+  });
+const upload = multer({ storage });
 const register = require("../controllers/register");
 const login = require("../controllers/login");
 const logout = require("../controllers/logout");
@@ -11,8 +19,8 @@ const resetemail = require("../controllers/resetemail");
 
 const router = express.Router();
 
-router.post('/register', register);
-
+/* router.post('/register', upload.fields([{ name: 'profile_pic', maxCount: 1}, { name: 'cv', maxCount: 1}]), register);
+ */
 
 
 router.post('/login', login);
@@ -52,9 +60,9 @@ router.get('/pwdreset', (req, res) => {
 });
 router.get('/profile', isLoggedIn, (req, res) => {
     if (req.user) {
-        res.sendFile("profile.html", { root: './public/' })
+        res.render("profile", { status: "loggedIn", user: req.user})
     } else {
-        res.sendFile("login.html", { root: './public/' });
+        res.redirect("/login");
     }
 })
 

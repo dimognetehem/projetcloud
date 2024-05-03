@@ -30,7 +30,7 @@ services:
       - AWS_DEFAULT_REGION=us-east-1
     volumes:
       - "${LOCALSTACK_VOLUME_DIR:-./volume}:/var/lib/localstack"
-      - localstack:/var/lib/localstack
+      - backend_localstack:/var/lib/localstack
       - "/var/run/docker.sock:/var/run/docker.sock"
     networks:
       - back
@@ -107,6 +107,6 @@ networks:
 
 volumes:
   mysql_data:
-    external: true
-  localstack:
-    # external: true
+    #  external: true
+  backend_localstack:
+     external: true

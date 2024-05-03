@@ -18,7 +18,11 @@
     <div class="modal-container">
       <div class="modal-left">
         <h1 class="modal-title">Inscription</h1>
+        <form onsubmit="return false;" method="POST" id="form">
+            <div class="alert alert-success" role="alert" id="success" style="display: none; color: green;"></div>
+            <div class="alert alert-danger" role="alert" id="error" style="display: none; color: red;"></div>
         <div class="input-columns">
+          
           <div class="input-column left-column">
             <div class="input-block">
               <label for="name" class="input-label">Nom</label>
@@ -57,16 +61,13 @@
                 <option value="Femme">Femme</option>
               </select>
             </div>
-            <div class="input-block">
-              <label for="country" class="input-label">Pays</label>
-              <input type="text" name="country" id="country" placeholder="Pays" pattern="[A-Za-z\s]{2,}" required title="Veuillez entrer au moins deux lettres alphabétiques ou plus pour le pays">
-            </div>
           </div>
         </div>
         <div class="modal-buttons">
           
           <button class="input-button">S'inscrire</button>
         </div>
+      </form>
         <p class="sign-up">Avez-vous déjà un compte ? <a href="/login">Se connecter</a></p>
       </div>
       <button class="icon-button close-button">
@@ -78,6 +79,7 @@
       </button>
     </div>
   </div>
+  <script src="js/register.js"></script>
   <script src="./script.js"></script>
 </body>
 
