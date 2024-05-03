@@ -5,7 +5,7 @@ const upload = multer({ storage });
 
 
 
-const register = (req, res) => {
+const register = async (req, res) => {
     upload.fields([{ name: 'urlPhoto' }, { name: 'urlCV' }]);
     console.log(req.body);
 
@@ -13,8 +13,8 @@ const register = (req, res) => {
     const urlPhoto = req.files['urlPhoto'][0].path;
     const urlCV = req.files['urlCV'][0].path;
 
-    /* await uploadFichier(req.files['urlPhoto'][0]);
-    await uploadFichier(req.files['urlCV'][0]); */
+    await uploadFichier(req.files['urlPhoto'][0]);
+    await uploadFichier(req.files['urlCV'][0]);
         
     const userDetails = { name, prenom, email, password, urlPhoto, urlCV, gender};
 
