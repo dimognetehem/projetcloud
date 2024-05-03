@@ -1,0 +1,112 @@
+services:
+
+# Adminer
+  adminer:
+    container_name: adminer
+    image: adminer:latest
+    restart: always
+    ports:
+      - "8080:8080"
+    networks:
+      - back
+
+  localstack:
+    container_name: "${LOCALSTACK_DOCKER_NAME:-localstack}"
+    # image: localstack/localstack:1.0.4
+    image: localstack/localstack:latest
+    ports:
+      - "4566:4566"            # LocalStack Gateway
+    expose:
+      - "4566"
+    environment:
+      # LocalStack configuration: https://docs.localstack.cloud/references/configuration/
+      - DEBUG=${DEBUG:-0}
+      - SERVICES=s3:4566
+      - HOSTNAME=localstack
+      - LOCALSTACK_HOST=localstack
+      # - DEFAULT_REGION=us-east-2
+      - AWS_ACCESS_KEY_ID=root
+      - AWS_SECRET_ACCESS_KEY=root
+      - AWS_DEFAULT_REGION=us-east-1
+    volumes:
+      - "${LOCALSTACK_VOLUME_DIR:-./volume}:/var/lib/localstack"
+      - localstack:/var/lib/localstack
+      - "/var/run/docker.sock:/var/run/docker.sock"
+    networks:
+      - back
+    entrypoint: docker-entrypoint.sh
+
+    command: >
+
+       "terraform init &&
+        terraform plan -out=tfplan &&
+        terraform apply -auto-approve tfplan"
+
+  mysql:
+    container_name: mysql
+    image: mysql:8.2.0
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: projetcloud
+    volumes:
+      # - /opt/mysql_data:/var/lib/mysql
+      # - /var/lib/mysql:/var/lib/mysql
+      # - ./data/db:/var/lib/mysql
+      # - mysql_data:/var/lib/mysql
+      - ./init.sql:/docker-entrypoint-initdb.d/0_init.sql
+
+      - mysql_data:/var/run/mysqld
+    ports:
+      - "3306:3306"
+    expose:
+      - "3306"
+    networks:
+      - back
+      # - front
+
+  backend:
+    build: ./
+    container_name: backend
+    ports: 
+      - "3000:3000"
+    environment:
+      HOST: mysql
+      DATABASE_USER: root
+      PASSWORD: root
+      DATABASE: projetcloud
+      MYSQL_URI: mysql://root:root@mysql:3306/projetcloud
+      JWT_SECRET: DxLKSPCNcnsoscs16fb8sSYQYCVC/*-+s15qqvdq
+      JWT_EXPIRES_IN: 1d
+      JWT_COOKIE_EXPIRES: 1
+    volumes:
+      - .:/backend
+      - /usr/src/app/node_modules
+    depends_on:
+      - mysql
+    command: ["./wait-for-it.sh", "mysql:3306", "--", "npm", "start"]
+    networks:
+      - back
+
+  # front:
+  #   build: ./front
+  #   container_name: front
+  #   ports:
+  #     - 4200:4200
+  #   volumes:
+  #     - ./front:/front
+  #     - /front/node_modules
+  #   networks:
+  #     - front
+
+networks:
+  back:
+    driver: bridge
+  # front:
+  #   external: true
+
+volumes:
+  mysql_data:
+    external: true
+  localstack:
+    # external: true
