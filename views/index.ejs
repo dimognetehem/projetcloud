@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="UTF-8">
+  <title>CodePen - A Pen by Paul Roger</title>
+  <link rel="stylesheet" href="./style1.css">
+
+</head>
+<body>
+<!-- partial:index.partial.html -->
+<div class="menu" id="menu">
+    <li><a href="#">ACCUEIL</a></li>
+    <%if (status == "loggedIn"){%>
+      <li><a href="/profile">PROFIL</a></li>
+      <li><a href="/logout">SE DECONNECTER</a></li>
+    <%}else{%>
+      <li><a href="/login">CONNEXION</a></li>
+      <li><a href="/register">INSCRIPTION</a></li>
+    <%}%>
+</div>
+<div class="container gradient-purple-blue">
+  <div class="under-container bubble" style="height:90vh;">
+    <div class="line">
+      <div class="square" id="square">B</div>
+      <div class="square" >i</div>
+      <div class="square" >e</div>
+      <div class="square" >n</div>
+      <div class="square" >v</div>
+      <div class="square" >e</div>
+      <div class="square" >n</div>
+      <div class="square" >u</div>
+      <div class="square" >e</div>
+      <!-- <div class="square" style="margin-left:30px;">I</div>
+      <div class="square" >'</div>
+      <div class="square" >m</div> -->
+    </div>
+    <%if (status == "loggedIn"){%>
+    <div class="line">
+      <div class="square"><%= user.name %></div>
+      
+    </div>
+    <%}%>
+  </div>
+  <div class="under-container" style="height:10vh">
+    <div class="mouse">
+      <div class="molette"></div>
+    </div>
+  </div>
+  </div>
+</div>
+<!-- <div class="container" id="secondcontainer">
+  <div class="under-container">
+    <div class="profil-picture" id="profilpicture">
+      <img src="https://scontent-cdt1-1.xx.fbcdn.net/v/t1.0-9/42359178_2096194380400598_6439087177153380352_n.jpg?_nc_cat=101&oh=97fb824feb2bedff898e826dfef84504&oe=5C491364">
+    </div>
+  </div>
+</div> -->
+<!-- partial -->
+  <script  src="./script1.js"></script>
+
+</body>
+</html>
