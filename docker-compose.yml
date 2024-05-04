@@ -61,12 +61,19 @@ services:
       - "3306:3306"
     expose:
       - "3306"
+
+    healthcheck:
+            test: ["CMD", "mysqladmin" ,"ping", "-h", "127.0.0.1"]
+            timeout: 5s
+            retries: 5
+            
     networks:
       - back
-      # - front
+
 
   backend:
     build: ./
+    restart: on-failure
     container_name: backend
     ports: 
       - "3000:3000"
@@ -83,30 +90,17 @@ services:
       - .:/backend
       - /usr/src/app/node_modules
     depends_on:
-      - mysql
-    command: ["./wait-for-it.sh", "mysql:3306", "--", "npm", "start"]
+      mysql:
+        condition: service_healthy
+  
     networks:
       - back
-
-  # front:
-  #   build: ./front
-  #   container_name: front
-  #   ports:
-  #     - 4200:4200
-  #   volumes:
-  #     - ./front:/front
-  #     - /front/node_modules
-  #   networks:
-  #     - front
 
 networks:
   back:
     driver: bridge
-  # front:
-  #   external: true
 
 volumes:
   mysql_data:
-    #  external: true
+  
   backend_localstack:
-     external: true

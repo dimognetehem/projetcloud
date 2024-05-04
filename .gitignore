@@ -1,0 +1,16 @@
+# Dossiers ignorés
+node_modules/
+coverage/
+build/
+dist/
+.cache/
+tmp/
+logs/
+
+# Fichiers ignorés
+*.log
+*.pid
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.DS_Store

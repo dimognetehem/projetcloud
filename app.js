@@ -35,7 +35,6 @@ const initSqlScript = fs.readFileSync('./init.sql', 'utf8');
 
 
 
-
 // Création d'une instance du service S3
 const s3 = new aws.S3({
     endpoint: 'localstack:4566',

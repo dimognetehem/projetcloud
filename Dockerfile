@@ -1,4 +1,4 @@
-# Utiliser l'image de base Node.js 18.17.1
+# Utiliser l'image de base Node.js dernière version
 FROM node:latest
 
 # Créer le répertoire de travail de l'application dans le conteneur
@@ -7,10 +7,6 @@ WORKDIR /usr/src/app
 # Copier le package.json et le package-lock.json dans le répertoire de travail
 COPY package*.json ./
 #Dockerfile
-
-COPY wait-for-it.sh /wait-for-it.sh
-
-RUN chmod +x /wait-for-it.sh
 
 # Installer les dépendances de l'application
 RUN npm install
