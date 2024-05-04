@@ -2,6 +2,14 @@
 
 ProjetCloud est une application conteneurisée qui offre une plateforme sécurisée de gestion des utilisateurs leur permettant d'uploader leur CV et leur photo de profil vers un service cloud simulé en local appelé LocalStack. Il permet aux utilisateurs de s'inscrire, de se connecter et de consulter leurs informations personnelles.
 
+# Architecture du projet
+
+![alt text](https://github.com/dimognetehem/projetcloud/blob/main/Architecture.png?raw=true)
+
+# Technologies utilisées
+
+![alt text](https://github.com/dimognetehem/projetcloud/blob/main/TechnologiesUtilisées.png?raw=true)
+
 ## Prérequis
 
 Avant de commencer, assurez-vous d'avoir les éléments suivants installés :
