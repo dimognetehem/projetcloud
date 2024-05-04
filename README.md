@@ -15,7 +15,7 @@ ProjetCloud est une application conteneurisée qui offre une plateforme sécuris
 Avant de commencer, assurez-vous d'avoir les éléments suivants installés :
 
 - Docker
-- Docker Compose
+- Docker Compose version v2.26.1-desktop.1
 
 ## Installation
 
@@ -29,7 +29,7 @@ Avant de commencer, assurez-vous d'avoir les éléments suivants installés :
 
 3. Lancez l'application en exécutant la commande Docker Compose :
 
-- docker-compose up
+- docker compose up
 
 Cela démarrera l'ensemble des services de votre application.
 
