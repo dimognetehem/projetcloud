@@ -21,11 +21,11 @@ Avant de commencer, assurez-vous d'avoir les éléments suivants installés :
 
 1. Clonez ce dépôt sur votre machine locale :
 
-- git clone https://github.com/votre_utilisateur/votre_projet_cloud.git
+- git clone https://github.com/dimognetehem/projetcloud.git
 
 2. Accédez au répertoire de votre projet :
 
-- cd votre_projet_cloud
+- cd projetcloud
 
 3. Lancez l'application en exécutant la commande Docker Compose :
 
